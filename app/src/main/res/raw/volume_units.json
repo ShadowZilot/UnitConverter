@@ -1,0 +1,18 @@
+{
+  "units": [
+    {
+      "name": "liter",
+      "factor": 1
+    },
+
+    {
+      "name": "gallon",
+      "factor": 3.785412
+    },
+
+    {
+      "name": "cubic meter",
+      "factor": 1000
+    }
+  ]
+}
