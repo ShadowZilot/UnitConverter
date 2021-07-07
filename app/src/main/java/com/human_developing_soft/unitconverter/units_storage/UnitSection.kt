@@ -1,11 +1,11 @@
 package com.human_developing_soft.unitconverter.units_storage
 
+import com.human_developing_soft.unitconverter.converting_logic.UnitLoader
+
 class UnitSection(
     unitLoader: UnitLoader
 ) {
-    private val mListOfUnits: List<BaseUnit> by lazy {
-        unitLoader.units()
-    }
+    private val mListOfUnits: List<BaseUnit> = unitLoader.units()
 
     private var mCurrentUnit = 0
 

@@ -1,19 +1,17 @@
-package com.human_developing_soft.unitconverter.domain
-
-import com.human_developing_soft.unitconverter.units_storage.PsychicUnit
+package com.human_developing_soft.unitconverter.converting_logic
 
 interface UnitConverter {
 
     fun convertedUnit(
-        convertingUnit: PsychicUnit,
-        finallyUnitFactor: Float
+            convertingUnit: PsychicUnit,
+            finallyUnitFactor: ConvertingFactor
     ): PsychicUnit
 
     class Base : UnitConverter {
 
         override fun convertedUnit(
-            convertingUnit: PsychicUnit,
-            finallyUnitFactor: Float
+                convertingUnit: PsychicUnit,
+                finallyUnitFactor: ConvertingFactor
         ): PsychicUnit {
             val baseUnit = convertingUnit.convertToBase()
             return PsychicUnit(baseUnit, finallyUnitFactor)
