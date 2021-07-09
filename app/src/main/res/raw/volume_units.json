@@ -2,17 +2,20 @@
   "units": [
     {
       "name": "liter",
-      "factor": 1
+      "formulaTo": "x*1",
+      "formulaFrom": "x/1"
     },
 
     {
       "name": "gallon",
-      "factor": 3.785412
+      "formulaTo": "x*3.785412",
+      "formulaFrom": "x/3.785412"
     },
 
     {
       "name": "cubic meter",
-      "factor": 1000
+      "formulaTo": "x*1000",
+      "formulaFrom": "x/1000"
     }
   ]
 }

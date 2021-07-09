@@ -1,23 +1,27 @@
 package com.human_developing_soft.unitconverter.converting_logic
 
+import com.human_developing_soft.unitconverter.converting_logic.converting_formula.ConvertingObject
+import com.human_developing_soft.unitconverter.converting_logic.converting_formula.StringFormula
 import com.human_developing_soft.unitconverter.units_storage.BaseUnit
 
 class PsychicUnit(
     private val mValue: Float,
-    convertingFactor: ConvertingFactor
+    formulaTo: StringFormula,
+    formulaFrom: StringFormula
 ) : BaseUnit() {
-    private val mConvertingFactor = convertingFactor
+    private val mConvertingObject = ConvertingObject.Base(mValue,
+        formulaTo, formulaFrom)
 
     constructor(
-            baseUnit: BaseUnit,
-            convertingFactor: ConvertingFactor
+        baseUnit: BaseUnit,
+        formulaTo: StringFormula,
+        formulaFrom: StringFormula
     ) : this(
-         convertingFactor * baseUnit.value(),
-        convertingFactor
+        baseUnit.value(), formulaTo, formulaFrom
     )
 
     override fun convertToBase(): BaseUnit {
-        return PsychicUnit(mConvertingFactor / mValue, ConvertingFactor())
+        return mConvertingObject.baseUnit()
     }
 
     override fun value() = mValue

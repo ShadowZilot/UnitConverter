@@ -1,20 +1,24 @@
 package com.human_developing_soft.unitconverter.converting_logic
 
+import com.human_developing_soft.unitconverter.converting_logic.converting_formula.StringFormula
+import com.human_developing_soft.unitconverter.units_storage.BaseUnit
+
 interface UnitConverter {
 
-    fun convertedUnit(
-            convertingUnit: PsychicUnit,
-            finallyUnitFactor: ConvertingFactor
-    ): PsychicUnit
+    fun convertedResult(): BaseUnit
 
-    class Base : UnitConverter {
+    class Base(
+        private val mConvertingUnit: BaseUnit,
+        private val mFormulaTo: StringFormula,
+        private val mFormulaFrom: StringFormula
+    ) : UnitConverter {
 
-        override fun convertedUnit(
-                convertingUnit: PsychicUnit,
-                finallyUnitFactor: ConvertingFactor
-        ): PsychicUnit {
-            val baseUnit = convertingUnit.convertToBase()
-            return PsychicUnit(baseUnit, finallyUnitFactor)
+        override fun convertedResult(): BaseUnit {
+            return PsychicUnit(
+                mConvertingUnit.convertToBase(),
+                mFormulaTo,
+                mFormulaFrom
+            )
         }
     }
 }
