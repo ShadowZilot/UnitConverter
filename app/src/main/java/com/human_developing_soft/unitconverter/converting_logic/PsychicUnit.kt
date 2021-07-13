@@ -1,28 +1,40 @@
 package com.human_developing_soft.unitconverter.converting_logic
 
 import com.human_developing_soft.unitconverter.converting_logic.converting_formula.ConvertingObject
+import com.human_developing_soft.unitconverter.converting_logic.converting_formula.FormulaShell
 import com.human_developing_soft.unitconverter.converting_logic.converting_formula.StringFormula
 import com.human_developing_soft.unitconverter.units_storage.BaseUnit
 
 class PsychicUnit(
-    private val mValue: Float,
-    formulaTo: StringFormula,
-    formulaFrom: StringFormula
+    private val mValue: Double,
+    private val mConvertingObject: ConvertingObject
 ) : BaseUnit() {
-    private val mConvertingObject = ConvertingObject.Base(mValue,
-        formulaTo, formulaFrom)
+
+    constructor(
+        value: Double,
+    ): this(
+        value, ConvertingObject.Dummy()
+    )
 
     constructor(
         baseUnit: BaseUnit,
-        formulaTo: StringFormula,
-        formulaFrom: StringFormula
-    ) : this(
-        baseUnit.value(), formulaTo, formulaFrom
-    )
+        formulaToCurrent: StringFormula
+    ): this(baseUnit.value(), ConvertingObject.Base(formulaToCurrent))
+
+    constructor(
+        value: Double,
+        formulaToCurrent: StringFormula,
+        formulaToBase: StringFormula
+    ): this(value, ConvertingObject.Base(formulaToCurrent, formulaToBase))
 
     override fun convertToBase(): BaseUnit {
-        return mConvertingObject.baseUnit()
+        return mConvertingObject
+            .baseUnit(mValue)
     }
 
-    override fun value() = mValue
+    override fun value(): Double {
+        return mConvertingObject
+            .currentUnit(mValue)
+            .value()
+    }
 }

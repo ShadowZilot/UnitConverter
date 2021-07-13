@@ -9,14 +9,12 @@ interface UnitConverter {
 
     class Base(
         private val mConvertingUnit: BaseUnit,
-        private val mFormulaTo: StringFormula,
         private val mFormulaFrom: StringFormula
     ) : UnitConverter {
 
         override fun convertedResult(): BaseUnit {
             return PsychicUnit(
                 mConvertingUnit.convertToBase(),
-                mFormulaTo,
                 mFormulaFrom
             )
         }
