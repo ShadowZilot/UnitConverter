@@ -1,12 +1,10 @@
 package com.human_developing_soft.unitconverter.units_storage
 
-import com.human_developing_soft.unitconverter.converting_logic.UnitLoader
+import com.human_developing_soft.unitconverter.units_storage.data_loading.PrimaryUnit
 
 class UnitSection(
-    unitLoader: UnitLoader
+    private val mListOfUnits: List<PrimaryUnit>
 ) {
-    private val mListOfUnits: List<BaseUnit> = unitLoader.units()
-
     private var mCurrentUnit = 0
 
     operator fun next() = mListOfUnits[mCurrentUnit++]
