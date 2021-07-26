@@ -4,12 +4,12 @@ import com.human_developing_soft.unitconverter.units_storage.data_loading.Primar
 
 class UnitSection(
     private val mListOfUnits: List<PrimaryUnit>
-) {
+): Iterator<PrimaryUnit> {
     private var mCurrentUnit = 0
 
-    operator fun next() = mListOfUnits[mCurrentUnit++]
+    override fun next() = mListOfUnits[mCurrentUnit++]
 
-    operator fun hasNext() = if (mCurrentUnit < mListOfUnits.size) {
+    override fun hasNext() = if (mCurrentUnit < mListOfUnits.size) {
         true
     } else {
         mCurrentUnit = 0

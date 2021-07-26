@@ -28,6 +28,14 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    viewBinding {
+        enabled = true
+    }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
