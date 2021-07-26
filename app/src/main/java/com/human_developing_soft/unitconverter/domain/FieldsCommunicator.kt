@@ -8,13 +8,25 @@ interface FieldsCommunicator {
 
     fun removeObserver(o: Observer)
 
-    fun startObserving()
+    fun resumeObserving()
+
+    fun pauseObserving()
 
     class Base(
         private val mFirstEditText: EditText,
         private val mSecondEditText: EditText,
         private val mSubject: Subject,
     ) : FieldsCommunicator {
+
+        init {
+            mFirstEditText.addTextChangedListener(
+                FieldWatcher.Base(mSubject, mFirstEditText, mSecondEditText)
+            )
+            mSecondEditText.addTextChangedListener(
+                FieldWatcher.Base(mSubject, mSecondEditText, mFirstEditText)
+            )
+        }
+
         override fun addObserver(o: Observer) {
             mSubject.addObserver(o)
         }
@@ -23,15 +35,14 @@ interface FieldsCommunicator {
             mSubject.removeObserver(o)
         }
 
-        override fun startObserving() {
+        override fun resumeObserving() {
             mFirstEditText.tag = FieldBlocker.Free
-            mFirstEditText.addTextChangedListener(
-                FieldWatcher.Base(mSubject, mFirstEditText, mSecondEditText)
-            )
             mSecondEditText.tag = FieldBlocker.Free
-            mSecondEditText.addTextChangedListener(
-                FieldWatcher.Base(mSubject, mSecondEditText, mFirstEditText)
-            )
+        }
+
+        override fun pauseObserving() {
+            mFirstEditText.tag = FieldBlocker.Blocked
+            mSecondEditText.tag = FieldBlocker.Blocked
         }
     }
 }
