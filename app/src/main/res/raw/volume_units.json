@@ -1,21 +1,27 @@
 {
   "units": [
     {
-      "name": "liter",
+      "name": "Litre",
       "formulaTo": "x*1",
       "formulaFrom": "x/1"
     },
 
     {
-      "name": "gallon",
+      "name": "US gallon",
       "formulaTo": "x*3.785412",
       "formulaFrom": "x/3.785412"
     },
 
     {
-      "name": "cubic meter",
+      "name": "Cubic meter",
       "formulaTo": "x*1000",
       "formulaFrom": "x/1000"
+    },
+
+    {
+      "name": "Cubic inches",
+      "formulaTo": "x*0.0163871",
+      "formulaFrom": "x*61.0237440947"
     }
   ]
 }
