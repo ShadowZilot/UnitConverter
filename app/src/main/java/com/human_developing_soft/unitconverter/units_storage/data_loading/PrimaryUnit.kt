@@ -1,5 +1,1 @@
-package com.human_developing_soft.unitconverter.units_storage.data_loading
-
-interface PrimaryUnit {
-
-}
+package com.human_developing_soft.unitconverter.units_storage.data_loadingimport com.human_developing_soft.unitconverter.converting_logic.converting_formula.FormulaShellinterface PrimaryUnit {    fun formulaShell(): FormulaShell    fun unitName(): String}

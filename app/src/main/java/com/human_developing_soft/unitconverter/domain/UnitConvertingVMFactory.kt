@@ -1,10 +1,1 @@
-package com.human_developing_soft.unitconverter.domain
-
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-
-class UnitConvertingVMFactory: ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return UnitConvertingVM() as T
-    }
-}
+package com.human_developing_soft.unitconverter.domainimport androidx.lifecycle.ViewModelimport androidx.lifecycle.ViewModelProviderimport com.human_developing_soft.unitconverter.units_storage.data_loading.UnitDataJSONimport com.human_developing_soft.unitconverter.units_storage.data_loading.UnitDataReaderimport com.human_developing_soft.unitconverter.units_storage.data_loading.UnitsDataLoaderclass UnitConvertingVMFactory(    private val mJsonFile: UnitDataJSON,    private val mUnitPairIndex: UnitIndexPair) : ViewModelProvider.Factory {    @Suppress("UNCHECKED_CAST")    override fun <T : ViewModel?> create(modelClass: Class<T>): T {        val unitData = UnitsDataLoader.Base(            UnitDataReader.Base(                mJsonFile            )        ).unitsData()        return UnitConvertingVM(            UnitList.Base(                unitData            ), mUnitPairIndex        ) as T    }}
