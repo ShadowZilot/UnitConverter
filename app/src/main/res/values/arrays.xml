@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tools_unit">
+        <item>Litre</item>
+        <item>Cubic meter</item>
+        <item>US gallon</item>
+        <item>Cubic inches</item>
+    </string-array>
+</resources>

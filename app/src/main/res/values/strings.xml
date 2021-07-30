@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">UnitConverter</string>
     <string name="type_unit_value_label">Type unit value</string>
+    <string name="add_field_label">Add field</string>
 </resources>
