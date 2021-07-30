@@ -9,7 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.human_developing_soft.unitconverter.MainActivity
+import com.human_developing_soft.unitconverter.ui.converting.MainActivity
 import com.human_developing_soft.unitconverter.R
 import org.hamcrest.Matchers.*
 import org.junit.Rule
@@ -97,6 +97,35 @@ class ConvertingScreenTest {
         )
         onView(withId(R.id.unit_input_second)).check(
             matches(withText("-528.3440745683693"))
+        )
+    }
+
+    @Test
+    fun testTypingInSecondFiled() {
+        onView(
+            withId(R.id.unit_first_selector)
+        ).perform(click())
+        onData(
+            allOf(
+                `is`(instanceOf(String::class.java)),
+                `is`("Cubic meter")
+            )
+        ).perform(click())
+        onView(
+            withId(R.id.unit_second_selector)
+        ).perform(click())
+        onData(
+            allOf(
+                `is`(instanceOf(String::class.java)),
+                `is`("Litre")
+            )
+        ).perform(click())
+
+        onView(withId(R.id.unit_input_second)).perform(
+            typeText("10")
+        )
+        onView(withId(R.id.unit_input_first)).check(
+            matches(withText("0.01"))
         )
     }
 }
