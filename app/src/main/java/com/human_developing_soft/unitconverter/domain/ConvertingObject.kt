@@ -17,17 +17,21 @@ interface ConvertingObject {
             val result = mutableListOf<String>()
             for (shell in mListOfFormulaShell) {
                 try {
-                    result.add(
-                        UnitConverter.Base(
-                            PsychicUnit(
-                                mMainBundle.value(),
-                                Base(
-                                    shell
-                                )
-                            ),
-                            mMainBundle.shells().formulaCurrent()
-                        ).convertedResult().value().toString()
-                    )
+                    if (shell != mMainBundle.shells()) {
+                        result.add(
+                            UnitConverter.Base(
+                                PsychicUnit(
+                                    mMainBundle.value(),
+                                    Base(
+                                        shell
+                                    )
+                                ),
+                                mMainBundle.shells().formulaCurrent()
+                            ).convertedResult().value().toString()
+                        )
+                    } else {
+                        result.add(mMainBundle.value().toString())
+                    }
                 } catch (e: NumberFormatException) {
                     result.add("")
                 }
