@@ -1,14 +1,28 @@
 package com.human_developing_soft.unitconverter.domain
 
-interface ConvertingDomainHolder {
+interface ConvertingDomainHolder : ConvertingEventSubject {
 
-    fun updateContent()
+    fun updateContent(content: List<DomainResponse>)
 
     class Base(
-
+        private val mContent: MutableList<DomainResponse>
     ) : ConvertingDomainHolder {
-        override fun updateContent() {
-            TODO("Not yet implemented")
+        private val mListObservers = mutableListOf<ConvertingEventListener>()
+
+        override fun updateContent(content: List<DomainResponse>) {
+            mContent.clear()
+            mContent.addAll(content)
+            mListObservers.forEach {
+                it.onConvertingFinished(mContent)
+            }
+        }
+
+        override fun addObserver(observer: ConvertingEventListener) {
+            mListObservers.add(observer)
+        }
+
+        override fun removeObserver(observer: ConvertingEventListener) {
+            mListObservers.add(observer)
         }
     }
 }

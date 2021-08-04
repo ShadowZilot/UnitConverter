@@ -1,29 +1,60 @@
 package com.human_developing_soft.unitconverter.domain
 
-interface ConvertingHandler {
-
-    fun addObserver(observer: ConvertingEventListener)
-
-    fun removeObserver(observer: ConvertingEventListener)
+interface ConvertingHandler: ConvertingEventSubject {
 
     fun implementCalculations(preparedList: PreparedContent)
 
-    class Base : ConvertingHandler {
-        private val mListObservers = mutableListOf<ConvertingEventListener>()
-        private val mConvertingData = ConvertingDomainHolder.Base()
+    class Base(
+        private val mUnits: UnitList
+    ) : ConvertingHandler {
+        private var mConvertingData = ConvertingDomainHolder.Base(
+            mutableListOf(
+                DomainResponse.Base(
+                    "",
+                    mUnits.unitsName(),
+                    0
+                ),
+                DomainResponse.Base(
+                    "",
+                    mUnits.unitsName(),
+                    1
+                )
+            )
+        )
 
         override fun addObserver(observer: ConvertingEventListener) {
-            mListObservers.add(observer)
+            mConvertingData.addObserver(observer)
         }
 
         override fun removeObserver(observer: ConvertingEventListener) {
-            mListObservers.add(observer)
+            mConvertingData.removeObserver(observer)
         }
 
         override fun implementCalculations(preparedList: PreparedContent) {
-            // TODO implement this
-            // Here we need to connect the calculations results and other data
-            // Save it here and send notification to UI
+            val valuesList = preparedList
+                .convertingObject()
+                .convertAll()
+            val content = preparedList.content() as MutableList<MediumContent>
+            for (i in valuesList.indices) {
+                try {
+                    content[i].addValue(
+                        valuesList[i]
+                    )
+                } catch (e: RuntimeException) {
+                    try {
+                        content[i + 1] = content[i + 1].addValue(
+                            valuesList[i + 1]
+                        )
+                    } catch (e: IndexOutOfBoundsException) {
+                        break
+                    }
+                }
+            }
+            mConvertingData.updateContent(
+                content.map {
+                    it.mapToResponse(mUnits)
+                }
+            )
         }
     }
 }

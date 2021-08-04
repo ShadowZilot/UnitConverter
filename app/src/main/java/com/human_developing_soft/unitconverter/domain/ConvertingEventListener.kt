@@ -1,5 +1,5 @@
 package com.human_developing_soft.unitconverter.domain
 
 interface ConvertingEventListener {
-    fun onConvertingFinished()
+    fun onConvertingFinished(content: List<DomainResponse>)
 }

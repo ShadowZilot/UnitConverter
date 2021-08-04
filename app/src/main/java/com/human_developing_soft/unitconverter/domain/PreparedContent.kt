@@ -6,6 +6,8 @@ interface PreparedContent {
 
     fun convertingObject(): ConvertingObject
 
+    fun content(): List<MediumContent>
+
     class Base(
         private val mUnits: UnitList,
         private val mInitContent: UiContentHolder
@@ -15,5 +17,7 @@ interface PreparedContent {
             mInitContent.mainObject(mUnits),
             mInitContent.formulaShells(mUnits)
         )
+
+        override fun content() = mInitContent.mediumList()
     }
 }
