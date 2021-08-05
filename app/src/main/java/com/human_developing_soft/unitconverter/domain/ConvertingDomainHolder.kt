@@ -19,6 +19,9 @@ interface ConvertingDomainHolder : ConvertingEventSubject {
 
         override fun addObserver(observer: ConvertingEventListener) {
             mListObservers.add(observer)
+            mListObservers.forEach {
+                it.onConvertingFinished(mContent)
+            }
         }
 
         override fun removeObserver(observer: ConvertingEventListener) {

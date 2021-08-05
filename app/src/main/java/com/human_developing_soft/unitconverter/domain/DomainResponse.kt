@@ -13,20 +13,21 @@ interface DomainResponse {
         private val mFieldValue: String,
         private val mSpinnerValue: Array<String>,
         private val mSelectedIndex: Int
-    ): DomainResponse {
+    ) : DomainResponse {
         override fun putContent(field: EditText, spinner: Spinner) {
             field.tag = FieldBlocker.Block
             field.setText(mFieldValue)
-            field.tag = FieldBlocker.Free
-
             val spinnerAdapter = ArrayAdapter(
                 spinner.context,
                 android.R.layout.simple_spinner_item,
                 mSpinnerValue
             )
             spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.tag = FieldBlocker.Block
             spinner.adapter = spinnerAdapter
             spinner.setSelection(mSelectedIndex)
+            spinner.tag = FieldBlocker.Free
+            field.tag = FieldBlocker.Free
         }
 
         override fun toString(): String {

@@ -34,8 +34,12 @@ interface ConvertingView {
 
         init {
             mBinding.unitInputFirst.addTextChangedListener {
-                mUiListener.onChanged(it.toString(),
-                    mDeletingIndex)
+                if (mBinding.unitInputFirst.tag == FieldBlocker.Free) {
+                    mUiListener.onChanged(
+                        it.toString(),
+                        mDeletingIndex
+                    )
+                }
             }
             mBinding.unitFirstSelector.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -44,17 +48,23 @@ interface ConvertingView {
                     position: Int,
                     id: Long
                 ) {
-                    mUiListener.onChanged(
-                        mBinding.unitInputFirst.text.toString(),
-                        mDeletingIndex)
+                    if (mBinding.unitFirstSelector.tag == FieldBlocker.Block) {
+                        mUiListener.onChanged(
+                            mBinding.unitInputFirst.text.toString(),
+                            mDeletingIndex
+                        )
+                    }
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
+            mBinding.removeViewBtn.setOnClickListener {
+                mListener.onDelete(mDeletingIndex)
+            }
         }
 
         override fun notifyDeletingListener(listener: OnCVDelete) {
-            mListener.onDelete(mDeletingIndex)
+            mListener = listener
         }
 
         override fun notifyUiListener(listener: OnCVChanged) {

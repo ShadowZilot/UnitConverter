@@ -11,27 +11,32 @@ class ConvertingHandlerTest : TestCase() {
 
     @Test
     fun baseConvertingTest() {
+        var isFirst = true
         val handler = ConvertingHandler.Base(
             FakeUnitList()
         )
         handler.addObserver(object : ConvertingEventListener {
             override fun onConvertingFinished(content: List<DomainResponse>) {
-                val stringArr = FakeUnitList().unitsName()
-                assertEquals(
-                    listOf(
-                        DomainResponse.Base(
-                            "10",
-                            stringArr,
-                            0
+                if (isFirst) {
+                    isFirst = !isFirst
+                } else {
+                    val stringArr = FakeUnitList().unitsName()
+                    assertEquals(
+                        listOf(
+                            DomainResponse.Base(
+                                "10",
+                                stringArr,
+                                0
+                            ),
+                            DomainResponse.Base(
+                                "2.6417203728418466",
+                                stringArr,
+                                1
+                            )
                         ),
-                        DomainResponse.Base(
-                            "2.6417203728418466",
-                            stringArr,
-                            1
-                        )
-                    ),
-                    content
-                )
+                        content
+                    )
+                }
             }
         })
         handler.implementCalculations(

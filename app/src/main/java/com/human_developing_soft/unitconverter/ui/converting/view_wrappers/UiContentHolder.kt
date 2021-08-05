@@ -39,7 +39,7 @@ interface UiContentHolder {
 
         override fun mediumList(): List<MediumContent> {
             val result = mutableListOf<MediumContent>()
-            for (i in mPositionsList) {
+            for (i in mPositionsList.indices) {
                 val value = if (i == mSelectedIndex) {
                     mChangedField
                 } else {

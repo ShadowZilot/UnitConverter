@@ -9,6 +9,8 @@ interface CVBuilder {
 
     fun buildCV(deletingIndex: Int): ConvertingView
 
+    fun deleteCV(deletingIndex: Int)
+
     class Base(
         private val mLayout: ViewGroup,
     ) : CVBuilder {
@@ -20,14 +22,20 @@ interface CVBuilder {
                 )
             mLayout.addView(cv.root)
             cv.removeViewBtn.visibility = if (mLayout.childCount > 1) {
-                View.GONE
-            } else {
                 View.VISIBLE
+            } else {
+                View.GONE
             }
+            cv.unitInputFirst.tag = FieldBlocker.Free
+            cv.unitFirstSelector.tag = FieldBlocker.Free
             return ConvertingView.Base(
                 cv,
                 deletingIndex
             )
+        }
+
+        override fun deleteCV(deletingIndex: Int) {
+            mLayout.removeViewAt(deletingIndex)
         }
     }
 }

@@ -45,7 +45,7 @@ interface ConvertingHandler: ConvertingEventSubject {
                         content[i + 1] = content[i + 1].addValue(
                             valuesList[i + 1]
                         )
-                    } catch (e: IndexOutOfBoundsException) {
+                    } catch (e: RuntimeException) {
                         break
                     }
                 }
