@@ -37,7 +37,7 @@ interface ConvertingHandler: ConvertingEventSubject {
             val content = preparedList.content() as MutableList<MediumContent>
             for (i in valuesList.indices) {
                 try {
-                    content[i].addValue(
+                    content[i] = content[i].addValue(
                         valuesList[i]
                     )
                 } catch (e: RuntimeException) {

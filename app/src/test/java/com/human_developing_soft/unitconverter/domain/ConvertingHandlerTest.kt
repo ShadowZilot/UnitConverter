@@ -52,4 +52,48 @@ class ConvertingHandlerTest : TestCase() {
             )
         )
     }
+
+    @Test
+    fun inputInOtherField() {
+        var isFirst = true
+        val handler = ConvertingHandler.Base(
+            FakeUnitList()
+        )
+        handler.addObserver(object : ConvertingEventListener {
+            override fun onConvertingFinished(content: List<DomainResponse>) {
+                if (isFirst) {
+                    isFirst = !isFirst
+                } else {
+                    val stringArr = FakeUnitList().unitsName()
+                    assertEquals(
+                        listOf(
+                            DomainResponse.Base(
+                                "37.85412",
+                                stringArr,
+                                0
+                            ),
+                            DomainResponse.Base(
+                                "10",
+                                stringArr,
+                                1
+                            )
+                        ),
+                        content
+                    )
+                }
+            }
+        })
+        handler.implementCalculations(
+            PreparedContent.Base(
+                FakeUnitList(),
+                UiContentHolder.Base(
+                    "10",
+                    listOf(
+                        0, 1
+                    ),
+                    1
+                )
+            )
+        )
+    }
 }
