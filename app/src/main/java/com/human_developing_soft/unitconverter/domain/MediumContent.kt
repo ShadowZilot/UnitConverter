@@ -8,23 +8,30 @@ interface MediumContent {
 
     class Base(
         private val mValue: String,
-        private val mPosition: Int
+        private val mPosition: Int,
+        private val mIsChanged: Boolean
     ) : MediumContent {
         override fun addValue(value: String) = if (mValue.isNotEmpty()) {
             throw RuntimeException("Value is not empty!")
         } else {
             Base(
                 value,
-                mPosition
+                mPosition,
+                mIsChanged
             )
         }
 
         override fun mapToResponse(units: UnitList): DomainResponse {
-            return DomainResponse.Base(
+            val response = DomainResponse.Base(
                 mValue,
                 units.unitsName(),
                 mPosition
             )
+            return if (mIsChanged) {
+                NonChangedDomainResponse(response)
+            } else {
+                response
+            }
         }
     }
 }
