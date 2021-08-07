@@ -3,7 +3,7 @@ package com.human_developing_soft.unitconverter.domain
 import android.widget.EditText
 import android.widget.Spinner
 
-class NonChangedDomainResponse(
+data class NonChangedDomainResponse(
     private val mDecoratingObject: DomainResponse
 ) : DomainResponse {
 

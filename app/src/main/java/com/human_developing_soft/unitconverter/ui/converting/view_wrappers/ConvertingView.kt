@@ -19,10 +19,12 @@ interface ConvertingView {
     class Base(
         private val mBinding: ConvertingItemBinding,
         private val mDeletingIndex: Int
-    ): ConvertingView {
+    ) : ConvertingView {
         private var mUiListener: OnCVChanged = object : OnCVChanged {
-            override fun onChanged(fieldValue: String,
-                                   selectedIndex: Int) {
+            override fun onChanged(
+                fieldValue: String,
+                selectedIndex: Int
+            ) {
                 // do nothing
             }
         }
@@ -41,23 +43,24 @@ interface ConvertingView {
                     )
                 }
             }
-            mBinding.unitFirstSelector.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    if (mBinding.unitFirstSelector.tag == FieldBlocker.Block) {
-                        mUiListener.onChanged(
-                            mBinding.unitInputFirst.text.toString(),
-                            mDeletingIndex
-                        )
+            mBinding.unitFirstSelector.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        if (mBinding.unitFirstSelector.tag == FieldBlocker.Free) {
+                            mUiListener.onChanged(
+                                mBinding.unitInputFirst.text.toString(),
+                                mDeletingIndex
+                            )
+                        }
                     }
-                }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            }
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
+                }
             mBinding.removeViewBtn.setOnClickListener {
                 mListener.onDelete(mDeletingIndex)
             }

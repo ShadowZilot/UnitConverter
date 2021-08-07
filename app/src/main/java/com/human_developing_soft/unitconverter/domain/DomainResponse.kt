@@ -16,18 +16,20 @@ interface DomainResponse {
     ) : DomainResponse {
         override fun putContent(field: EditText, spinner: Spinner) {
             field.tag = FieldBlocker.Block
-            field.setText(mFieldValue)
-            val spinnerAdapter = ArrayAdapter(
-                spinner.context,
-                android.R.layout.simple_spinner_item,
-                mSpinnerValue
-            )
-            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.tag = FieldBlocker.Block
-            spinner.adapter = spinnerAdapter
+            field.setText(mFieldValue)
+            if (spinner.adapter == null) {
+                val spinnerAdapter = ArrayAdapter(
+                    spinner.context,
+                    android.R.layout.simple_spinner_item,
+                    mSpinnerValue
+                )
+                spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinner.adapter = spinnerAdapter
+            }
             spinner.setSelection(mSelectedIndex)
-            spinner.tag = FieldBlocker.Free
             field.tag = FieldBlocker.Free
+            spinner.tag = FieldBlocker.Free
         }
 
         override fun toString(): String {

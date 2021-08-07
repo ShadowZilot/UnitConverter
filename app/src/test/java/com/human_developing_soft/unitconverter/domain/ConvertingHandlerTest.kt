@@ -23,10 +23,12 @@ class ConvertingHandlerTest : TestCase() {
                     val stringArr = FakeUnitList().unitsName()
                     assertEquals(
                         listOf(
-                            DomainResponse.Base(
-                                "10",
-                                stringArr,
-                                0
+                            NonChangedDomainResponse(
+                                DomainResponse.Base(
+                                    "10",
+                                    stringArr,
+                                    0
+                                )
                             ),
                             DomainResponse.Base(
                                 "2.6417203728418466",
@@ -72,11 +74,13 @@ class ConvertingHandlerTest : TestCase() {
                                 stringArr,
                                 0
                             ),
-                            DomainResponse.Base(
-                                "10",
-                                stringArr,
-                                1
-                            )
+                            NonChangedDomainResponse(
+                                DomainResponse.Base(
+                                    "10",
+                                    stringArr,
+                                    1
+                                )
+                            ),
                         ),
                         content
                     )

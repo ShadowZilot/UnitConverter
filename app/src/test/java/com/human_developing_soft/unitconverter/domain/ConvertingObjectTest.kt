@@ -94,7 +94,7 @@ class ConvertingObjectTest : TestCase() {
             )
         )
         val result = converting.convertAll()
-        assertEquals(listOf("1"), result)
+        assertEquals(listOf("1.0"), result)
     }
 
     @Test
