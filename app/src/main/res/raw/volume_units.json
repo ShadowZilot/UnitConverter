@@ -7,9 +7,21 @@
     },
 
     {
+      "name": "Millilitres",
+      "formulaTo": "x*0.001",
+      "formulaFrom": "x/0.001"
+    },
+
+    {
       "name": "US gallon",
       "formulaTo": "x*3.785412",
       "formulaFrom": "x/3.785412"
+    },
+
+    {
+      "name": "Cubic centimeters",
+      "formulaTo": "x*0.001",
+      "formulaFrom": "x/0.001"
     },
 
     {
