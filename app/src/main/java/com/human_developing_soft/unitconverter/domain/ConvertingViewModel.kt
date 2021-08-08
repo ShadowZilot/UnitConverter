@@ -6,4 +6,6 @@ interface ConvertingViewModel: OnUiChangedListener {
     fun addObserver(observer: ConvertingEventListener)
 
     fun removeObserver(observer: ConvertingEventListener)
+
+    fun unitNames(): Array<String>
 }

@@ -4,19 +4,15 @@ interface ConvertingHandler: ConvertingEventSubject {
 
     fun implementCalculations(preparedList: PreparedContent)
 
-    class Base(
-        private val mUnits: UnitList
-    ) : ConvertingHandler {
+    class Base : ConvertingHandler {
         private var mConvertingData = ConvertingDomainHolder.Base(
             mutableListOf(
                 DomainResponse.Base(
                     "",
-                    mUnits.unitsName(),
                     0
                 ),
                 DomainResponse.Base(
                     "",
-                    mUnits.unitsName(),
                     1
                 )
             )
@@ -52,7 +48,7 @@ interface ConvertingHandler: ConvertingEventSubject {
             }
             mConvertingData.updateContent(
                 content.map {
-                    it.mapToResponse(mUnits)
+                    it.mapToResponse()
                 }
             )
         }

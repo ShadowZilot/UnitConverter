@@ -51,7 +51,9 @@ interface ConvertingView {
                         position: Int,
                         id: Long
                     ) {
-                        if (mBinding.unitFirstSelector.tag == FieldBlocker.Free) {
+                        if (mBinding.unitInputFirst.text.toString().isNotEmpty() &&
+                            mBinding.unitFirstSelector.tag == FieldBlocker.Free
+                        ) {
                             mUiListener.onChanged(
                                 mBinding.unitInputFirst.text.toString(),
                                 mDeletingIndex

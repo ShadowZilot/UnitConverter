@@ -5,31 +5,26 @@
       "formulaTo": "x*1",
       "formulaFrom": "x/1"
     },
-
     {
       "name": "Millilitres",
       "formulaTo": "x*0.001",
       "formulaFrom": "x/0.001"
     },
-
     {
       "name": "US gallon",
       "formulaTo": "x*3.785412",
       "formulaFrom": "x/3.785412"
     },
-
     {
       "name": "Cubic centimeters",
       "formulaTo": "x*0.001",
       "formulaFrom": "x/0.001"
     },
-
     {
       "name": "Cubic meter",
       "formulaTo": "x*1000",
       "formulaFrom": "x/1000"
     },
-
     {
       "name": "Cubic inches",
       "formulaTo": "x*0.0163871",

@@ -1,6 +1,5 @@
 package com.human_developing_soft.unitconverter.domain
 
-import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
 import com.human_developing_soft.unitconverter.ui.converting.view_wrappers.FieldBlocker
@@ -11,22 +10,12 @@ interface DomainResponse {
 
     data class Base(
         private val mFieldValue: String,
-        private val mSpinnerValue: Array<String>,
         private val mSelectedIndex: Int
     ) : DomainResponse {
         override fun putContent(field: EditText, spinner: Spinner) {
             field.tag = FieldBlocker.Block
             spinner.tag = FieldBlocker.Block
             field.setText(mFieldValue)
-            if (spinner.adapter == null) {
-                val spinnerAdapter = ArrayAdapter(
-                    spinner.context,
-                    android.R.layout.simple_spinner_item,
-                    mSpinnerValue
-                )
-                spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                spinner.adapter = spinnerAdapter
-            }
             spinner.setSelection(mSelectedIndex)
             field.tag = FieldBlocker.Free
             spinner.tag = FieldBlocker.Free
@@ -43,7 +32,6 @@ interface DomainResponse {
             other as Base
 
             if (mFieldValue != other.mFieldValue) return false
-            if (!mSpinnerValue.contentEquals(other.mSpinnerValue)) return false
             if (mSelectedIndex != other.mSelectedIndex) return false
 
             return true
@@ -51,7 +39,6 @@ interface DomainResponse {
 
         override fun hashCode(): Int {
             var result = mFieldValue.hashCode()
-            result = 31 * result + mSpinnerValue.contentHashCode()
             result = 31 * result + mSelectedIndex
             return result
         }

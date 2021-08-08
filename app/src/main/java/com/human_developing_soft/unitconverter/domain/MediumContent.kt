@@ -4,7 +4,7 @@ interface MediumContent {
 
     fun addValue(value: String): MediumContent
 
-    fun mapToResponse(units: UnitList): DomainResponse
+    fun mapToResponse(): DomainResponse
 
     class Base(
         private val mValue: String,
@@ -21,10 +21,9 @@ interface MediumContent {
             )
         }
 
-        override fun mapToResponse(units: UnitList): DomainResponse {
+        override fun mapToResponse(): DomainResponse {
             val response = DomainResponse.Base(
                 mValue,
-                units.unitsName(),
                 mPosition
             )
             return if (mIsChanged) {
